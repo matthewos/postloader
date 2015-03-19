@@ -1,0 +1,345 @@
+# postloader
+Automatically exported from code.google.com/p/postloader
+postLoader 4.4.8 (readmii.txt 1.10)
+
+========================================
+What postLoader is:
+========================================
+* HomeBrew Browser with subfolder and xml support
+* Channel/Title Browser with filters and cover
+* Emulator frontend page with plugin system (plugin .dol from WiiFlow)
+* neek2o & Uneek+DI game browser with cover support
+* game loaders forwarder (for CFG, GX and WiiFlow) with cover and filters support
+* DML/QF gamecube browser with USB to SD copy feature and auto wad install (please, read notes carefully !!!)
+* Themable user interface
+* Wiiload server
+* Designed for stability and performance
+
+========================================
+Features:
+========================================
+
+General:
+* If started from priiloader it gains AHPBROT and spawn full hardware rights to homebrew applications (with system menu 4.3 it seems that priiloader can't pass AHBPROT. Use the forwarder channel)
+* Autoboot your default application/channel: If you don't press (A) in time to enter in interactive mode, postLoader will launch the predefined app (if enabled)
+* Direct access to BOOTMII
+* Support costom splash screen (only from SD device)
+* Full support for UNEEK environment. May work under SNEEK
+* Support for Wiimote and GC controllers
+* Intergrated UNEEK nand switcher
+* wiiload update: If you send postLoader.dol via wiiload, postloader installation will be updated (after confirmation).
+* Direct shortcut for SettingEditor GUI and WiiMod
+* Upper and bottom toolbars with icons for accessing common command
+
+oneek2o advanced support
+* USB Access for HOMEBREW (see historii.txt for important notices)
+* Multiple nand support for different region games
+* Built in game cache rebuilder (partially implemented, see historii.txt)
+* uid.sys managment for neek (neek2o)
+
+Uneek+DI game browser (see historii.txt)
+* Support covers
+* Support title vote
+
+USB Loaders forwarder
+* Support cfg, gx and wiiflow (actually wiiflow crash)
+* Support covers
+* Support title vote
+* Support ios selection
+
+DM(L) gamecube games
+* Support covers
+* Support title vote
+* Support ios selection
+* Can copy games from USB to SD before execute them
+
+Homebrew:
+* HB Channel replacement: It can be used to browse homebrew application, with it own interface. 
+* Dangerous homebrews can be hidden
+* Full support for meta.xml arguments and all other tags.
+* up to 8 category can be assigned for each homebrew. Five category are assigned by default: Games/Utility/Emulators/Backup loaders/Hacking tools, and them can be changed in runtime
+* Can browse SD and USB device (FAT32 on first/active partition)
+* WiiLoad support (straight, compressed dol, zip archieve)
+
+Channels:
+* Nand emulation (ciosx/waninkoko on slot 249)
+* AHBPROT is need for real nand browsing (otherwise ios249 is used)
+* Wii System Channel replacemente: Can browse and run Channels, WiiWare and VC.
+* Can run Titles from real and emulated NAND on SD or USB with folder support
+* Titles can be sorted voted and/or hiddened
+* Support interactive application sorting
+* Sort titles by vote/name
+* Titles filters (System channels/wiiware/neogeo/c64... etc)
+* Fast titles search
+* Download title icons from wiitdb
+* Alternat nand folder support (other that classic root)
+
+========================================
+Installation:
+========================================
+
+postLoader can be executed like any wii homebrew. Anyway you can get the best from it in these ways:
+
+(A) Real Wii: priiloader extension via priibooterGUI (see below) [SUGGESTED]
+
+PRO: Easy to upgrade. All priibooterGUI beneficts
+CON: SD is always needed in the Wii
+
+1) Install to your SD or USB /apps/postloader like any homebrew
+2) Copy to your SD root priibooterGUI.dol. 
+3) Enter in priiloader pressing "reset" when you turn on your wii.
+4) Select "Load/Install file" from priiloader menu'
+5) Select priibooterGUI.dol
+6) Go back to main menu'
+7) Select settings -> Autoboot: Installed File
+8) Select settings -> Return to: Autoboot
+9) If you wish, you can remove priibooterGUI.dol from the SD
+
+(B) neek2o/UNEEK: priiloader extension via priibooterGUI
+
+1) Install to your SD or USB /apps/postloader like any homebrew
+2) Copy to your SD root neekbooter.dol. 
+3) Run your NEEK environment pressing "reset" to enter in neek priiloader.
+4) Select "Load/Install file" from priiloader menu'
+5) Select neekbooter.dol
+6) Go back to main menu'
+7) Select settings -> Autoboot: Installed File
+8) Select settings -> Return to: Autoboot
+9) If you wish, you can remove neekbooter.dol from the SD
+10) postLoader MUST exist on the root of SD, and SD must be inside the Wii
+
+========================================
+DM(L),QUADFORCE automatic mode:
+========================================
+
+When this option is enabled (press [home] while in gamecube mode, then "GameCube mode"), postLoader will choose and install the correct wad file to execute the selected gc/qf game.
+To use this feature, you must create a wads folder in your <dev>/ploader folder, for example usb://ploader/wads if your postloader data folder is in the usb device.
+Then rename the dm(l)/qadforce wads as follow
+
+DIOSMIOS_2.10.wad -> dm.wad
+DIOSMIOSLite_2.10.wad -> dml.wad
+quadforce_4.1.wad -> qfusb.wad
+quadforce_4.0.wad -> qfsd.wad
+
+so you will end with the following files
+
+<dev>://ploader/wads/dm.wad
+<dev>://ploader/wads/dml.wad
+<dev>://ploader/wads/qfusb.wad
+<dev>://ploader/wads/qfsd.wad
+
+Use only tested wads, from well known source. Installing these wads should be a safe operation, anyway it is a your choice. No warranty provided, no responsibility on me if you brick anything!
+
+========================================
+DML: (gamecube games on USB)
+========================================
+
+notes: ngc iso (already converted with DiscEX) must be copied in usb://ngc or usb://games folder (primary FAT32 part). 
+postLoader will take care to copy to sd://games when required (if DML is selected)
+Games icon from usb games are dimmed. Copying process is slow (1750 kb/s on my sd)
+If there is no space on sd, postLoader will ask to delete some games.
+
+========================================
+Usage:
+========================================
+
+Keys (during initialization - time depends on the speed of usb init + 2 sec)
+
+(A) Enter in interactive mode (show user interface)
+(B) Skip USB initialization
+
+Keys (interactive mode)
+
+(A) Start selected homebrew
+(B) Show selected application menu, also act as cancel on popup menu
+(-)(+) Change page
+(Home) Show postLoader options menu
+(1)(GCX) Go to page
+(2)(GCY) Show filter menu (if available)
+(up) WII Games
+(down) GC games
+(left) Channels
+(right) Homebrew
+
+
+========================================
+CUSTOM SPLASH SCREEN
+========================================
+
+Themes tipically contains and install their own splash screen.
+Copy your png named "ploader.png" on the root of SD card. 640x480 is suggested.
+Using a custom splash screen will slow a bit postLoader startup.
+
+========================================
+Additiona applications:
+========================================
+
+priibooterGUI.dol
+-------------------------
+
+priibooter is a little gui application intended to be installed under priiloader. It allow to
+* Boot (remembering last operation [sd needed])
+  > postloader from sd://apps/postloader/boot.dol or usb://apps/postloader/boot.dol
+  > postloader via POST forwarder channel
+  > HBC
+  > system menu
+  > neek (bootmii)
+* Enable postloader uneek nand folder switching functionality
+
+neek2obooter.app
+-------------------------
+
+As neek2o r96 do not support priiloader, you have to install neek2obooter.app to start games from real mode to neek2o. neek2obooter.app is available from full installation package 4.1.9.
+
+Installation:
+in (usb:/nands/pl_eu)/title/00000001/00000002/content/
+
+1) rename your system menu .app to sysmenu.app 
+2) copy neek2obooter.app and rename it as system menu
+
+example for 4.3 eu nand
+
+rename 0000009b.app to sysmenu.app
+rename neek2obooter.app to 0000009b.app
+
+!!! DO THIS ONLY IN YOUR R96 (and possibily above) NEEK2O, DO NOT TRY IN REAL NAND !!!
+
+This allow also to go back directly to real mode when you select return to menu in games.
+neek2obooter.app can also boot directly to postloader when you run your neek2o nand. Just create /title/00000001/00000002/data/n2oboot.ini (also empy) to enable this feature.
+
+neekbooter.dol
+-------------------------
+(OBSOLETE neek2o > r96 bypass priiloader): To be installed in priiloader under neek. It will run postloader from sd://apps/postloader/boot.dol or ISFS://apps/postloader/boot.dol
+
+NAND Folders:
+
+Alternate nand folders are supported only on SD and USB on first partition (active)
+
+
+========================================
+Files you will find after running postLoader:
+========================================
+
+SD://ploader.png: custom splashcreen (added by you)
+SD://ploader/ploader.sd: if it is present, usb will not be used
+dev://ploader/channels.png/: icon of installed channels (dev is the one selected the first time)
+dev://ploader/channels.cfg/: configuration data for channels/titles
+dev://ploader/channels.txt: dump of the last nand scan
+nand.dat in every emulated nand folder
+
+dev://ploader/channels.txt: dump of the last nand scan
+dev://ploader/ploader.cfg: postloader configuration file
+SD://ploader/pldneek.cfg: neek - postloader configuration file
+SD://ploader/sdonly.nek: neek - if it is present, usb will not be used
+
+
+========================================
+THEMES:
+========================================
+
+Since build b16, postLoader support themes. Actually only one theme at time can be used. 
+
+Themes must be copied to dev://ploader/theme and are composed of the following files
+
+* window.png: window elements. On load, it will be tiled 3x3 to draw corners, top, bottom, left rigth, and center of the window (if windowbk it is not present)
+* windowbk.png: (optional) this is the window background. It is actually used for menues. Dimensions should be multiple of 8.
+* button.png: 3x3 tile for drawing button (suggested size 24x24 px)
+* button_sel.png: 3x3 tile for drawing selected button (suggested size 24x24 px)
+* bkg.png: is the 640x480 background png
+* frame_back.png: is the background of empty icon. Should not be transparent
+* frame.png: is the standard frame for icons
+* frame_sel.png: when an icon is selected, this frame will be drawn
+
+* theme.cfg: it is an ascii configuration containing some customizabile values:
+  > grlibSettings.theme.windowMagX: how a window (for example menu) is enlarged in X axes
+  > grlibSettings.theme.windowMagY: Y axes
+  > grlibSettings.theme.buttonMagX: how a button is enlarged when mouseover... X
+  > grlibSettings.theme.buttonMagY: Y
+  > grlibSettings.theme.buttonsTextOffsetY: vertical text offset for buttons
+  > grlibSettings.fontBMF_reverse = 1: font color is reversed (if 1 text is black)
+  > theme.line1Y: selection name
+  > theme.line2Y: selection short description (if applicable)
+  > theme.line3Y: path and args info. If 0 it isn' displayed (like wii theme)
+NOTE: actually cfg file do not accept comments (like # or ; as first character of a line)
+
+========================================
+UNEEK Nand switcher notes:
+========================================
+
+Requirements:
+* Newest neek2obooter.app should be configured (OBSOLETE: priibooter.dol (dist. from b34 or above) installed in priiloader)
+* an sd inside the wii with uneek configured
+* the folder usb://nands containing up to 16 uneek nand subfolders
+
+How it works:
+When wii boot priibooter will create a list of available nands. Look at message that show the boot mode and press a key on wiimote o gc controller accordly.
+If you are in "UNEEK mode" and a nand image is on the root of usb, uneek is started.
+The nand can be switched both in real and emulated mode. In postLoader just select [home]->Options->Change UNEEK nand and choose your nand. The wii will reboot and nand changed
+
+NAND tracking:
+If you have a uneek nand on the root of usb, you should have also an empty folder under usb://nands. plneek will search an empty folder to store back current nand before copying new one. This is done automatically, but the first time you will try plneek maybe you forget it. So current nand will be backed up in "usb://nands/backup<random number>" folder
+
+========================================
+neek2o only features
+========================================
+
+Alternate per-game region nand
+--------------------
+
+postloader support nand switching for up 4 region. Anternate nand to use can be selected pressing (B) on the game cover
+
+/nands/pl_eu for euro pal nand
+/nands/pl_us for usa nand
+/nands/pl_jp for japan nand
+/nands/pl_kr for korean nand
+
+IMPORTANT: priiloader must be present on the nand. There is non need to configure it.
+
+If the region if different from default, postloader install as "installed file" in priiloader on the selected nand n2oswitch.dol that will run the disc, and on return to menu (or power off/on) will restore old settings
+Even if the four roms can be used for any porpouse, I suggest to leave them light, without any additional channel to keep high switching speed
+
+usb homebrew access
+-------------------
+postLoader thanks to the "magic code" from obcd can now access directly to usb hdd under neek2o. This is enabled with just 2 line of code. KEEP IN MIND, that even
+if postLoader will launch any hb, launched hb will not work correctly if relay on data in usb hdd. Every hb like postloader must be updated to run under neek2o like
+postloader do. I hope that a lot of homebrew makers will integrate this modification in their applications.
+ 
+Built in game cache rebuilder
+-----------------------------
+postLoader can now rebuild diconfig.bin by internal function only (ONLY) for the following kind of file structure
+ 
+/wbfs/<gamedescription>[gameid].wbfs
+or
+/wbfs/<anycharacter>.wbfs
+ 
+it is really much faster then neek2o. Reboot seems to be required.
+
+========================================
+Running vc/wiiware from realnand via neek2o
+========================================
+
+* Use modmii to create a fresh nand.
+* name this nand pln2o and put in usb://Nand/pln2o
+* Start that nand, configure it (also the network).
+* Install neek2obooter.app
+* postLoader will automatically copy (only one time) your vc/wiiware to pln2o nand and execute it.
+* This is a great workaround for WFC games and games that doens't work in d2x emulation
+
+
+CREDITS:
+----------------------------------------
+
+* obcd for all support during neek2o specific code and for let me enabling usb access under neek2o
+* GRRLIB (I've removed ttf support to have much smaller application)
+* USB Loader GX, I've used it's app_booter.dol... it seems to give the best compatibility
+* wiiXplorer for network code
+* Yal for disc boot code
+* Joyflow for (better) boot disc code
+* Priiloader
+* CFG Usb loader (for let me understand how priiload magic words should be used)
+* TriiForce: It was integrated in postLoader. I've tried to minimize the impact, so I can update postLoader as triiforce is updated.
+* oggzee for helping me to solve homebrew boot problems (wiimc & cfg72)
+* Dolphin: great help in testing
+* GBATemp community
+* davebaol for d2x and path code for ahbprot
+* FIX94 video init code
